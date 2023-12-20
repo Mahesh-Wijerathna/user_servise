@@ -8,3 +8,6 @@ touch server.js
 $ node server.js
 $ npm install -g nodemon
 $ nodemon server.js
+
+#postman_setings
+make port public 

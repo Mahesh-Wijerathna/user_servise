@@ -14,6 +14,9 @@ mongoose.connect('mongodb+srv://SoftwareProject:SoftwareProject@cluster0.r0hwfhg
 app.listen(4545,() =>{
     console.log("Server up and running - on 4545");
 })
+app.post("/tourist",(req,res) => {
+    res.send("This is tourist route");
+})
 app.get("/",(req,res) => {
     res.send("This is our main end point");
 
