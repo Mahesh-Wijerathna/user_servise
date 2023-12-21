@@ -1,11 +1,11 @@
 require('dotenv').config();
 const mongoose = require('mongoose');
-const port = 4000 // process.env.PORT;
+const port = process.env.PORT || 5000;
 const app = require('./app');
 
 
 mongoose.connect(
-    "mongodb+srv://SoftwareProject:SoftwareProject@cluster0.r0hwfhg.mongodb.net/?retryWrites=true&w=majority",
+    process.env.MONGO_URI,
     {}).then(result => {
         console.log("db conntected for user service")
         app.listen(port, () => {

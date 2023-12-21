@@ -15,7 +15,7 @@ const Router = require('./route')
 
 app.use(express.json())
 
-//app.use('/api/v1/tourist', Router);
+app.use('/api/v1/tourist', Router);
 //app.use('/api/v1/companies', CompanyRouter);
 //app.use('/api/v1/products', ProductRouter)
 //app.use('/api/v1/orders', OrderRouter)
