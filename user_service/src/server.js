@@ -7,9 +7,9 @@ const app = require('./app');
 mongoose.connect(
     process.env.MONGO_URI,
     {}).then(result => {
-        console.log("db conntected for user service")
+        console.log("user service part of database conntected")
         app.listen(port, () => {
-            console.log(`User service listening on port  ${port}`)
+            console.log(`User service part listening on port  ${port}`)
         })
     }
     ).catch(err => console.log(err))
