@@ -13,15 +13,18 @@ function App() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await axios.post("http://localhost:3001/api/v1/buyers", {
-      name: name,
-      email: email,
-      password: password,
-      phone: "123-456-7890"
+    await axios.post("https://automatic-space-system-v6v6pxwv66wrhpvx6-4000.app.github.dev/api/v1/tourist", {
+      
+    
+    
+      
     }).then((response) => {
+      console.log("then worked");
       console.log(response);
       window.location.href = "/";
     }).catch((error) => {
+      console.log();
+      console.log("catch worked");
       console.log(error);
     });
 
