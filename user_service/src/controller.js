@@ -1,4 +1,4 @@
-const BuyerModel = require('./tourist')
+const TouristModel = require('./tourist')
 const createHttpError = require('http-errors')
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
@@ -13,19 +13,19 @@ exports.login = async (req, res, next) => {
             throw createHttpError(400, 'Missing required parameters')
         }
 
-        const buyer = await BuyerModel.findOne({ email: email }).exec();
+        const tourist = await TouristModel.findOne({ email: email }).exec();
 
-        if (!buyer) {
+        if (!tourist) {
             throw createHttpError(400, 'User does not exist')
         }
 
-        const isPasswordValid = await bcrypt.compare(password, buyer.password);
+        const isPasswordValid = await bcrypt.compare(password, tourist.password);
 
         if (!isPasswordValid) {
             throw createHttpError(400, 'Invalid credentials')
         }
 
-        const user = await BuyerModel.findOne({ email: email }).exec();
+        const user = await TouristModel.findOne({ email: email }).exec();
 
         const token = jwt.sign(
             {
@@ -54,13 +54,15 @@ exports.register = async (req, res, next) => {
     const email = req.body.email
     const password = req.body.password
     const name = req.body.name
-    const phone = req.body.phone
+    const phoneNumber = req.body.phoneNumber
+    const country = req.body.country
+    const username = req.body.username
     try {
-        if (!email || !password || !name || !phone) {
+        if (!email || !password || !name || !phoneNumber  || !country || !username) {
             throw createHttpError(400, 'Missing required parameters')
         }
 
-        const isUserAvailable = await BuyerModel.findOne({ email: email }).exec();
+        const isUserAvailable = await TouristModel.findOne({ email: email }).exec();
 
         if (isUserAvailable) {
             throw createHttpError(400, 'User already exists')
@@ -68,14 +70,18 @@ exports.register = async (req, res, next) => {
 
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        const buyer = new BuyerModel({
+       
+        // tourist model
+        const tourist = new TouristModel({
             name: name,
             email: email,
-            password: hashedPassword,
-            phone: phone
+            country: country,
+            phoneNumber: phoneNumber,
+            username: username,
+            password: hashedPassword
         })
 
-        const result = await buyer.save();
+        const result = await tourist.save();
 
         res.status(201).send(result);
 

@@ -12,11 +12,16 @@ const touristSchema = new Schema({
         type: String,
         required: true,
     },
+    country: {
+        type: String,
+        required: true,
+    },
+    
     password: {
         type: String,
         required: true,
     },
-    phone: {
+    phoneNumber: {
         type: String,
         required: true,
     },
