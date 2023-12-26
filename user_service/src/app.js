@@ -3,6 +3,7 @@ const express = require('express')
 const app = express()
 const createHttpError = require('http-errors')
 const Router = require('./route')
+const jwt = require('jsonwebtoken');
 // cors
 const cors = require('cors');
 
@@ -20,6 +21,29 @@ app.use(express.json())
 // use cors
 app.use(cors());
 app.use('/api/v1/tourist', Router);
+app.use('/api/v1/auth', (req,res) => {
+    
+
+
+    const token = req.body.token || req.query.token || req.headers['x-access-token'];
+
+    if (!token) {
+        res.status(401).send('Token not provided');
+    }
+
+    try {
+        const decoded = jwt.verify(token, process.env.JWT_TOKEN_KEY);
+        req.user = decoded;
+    } catch (error) {
+        res.status(400).send('Invalid token');
+    }
+    return true;
+
+   
+
+}
+);
+
 //app.use('/api/v1/companies', CompanyRouter);
 //app.use('/api/v1/products', ProductRouter)
 //app.use('/api/v1/orders', OrderRouter)

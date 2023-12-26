@@ -13,7 +13,7 @@ function App() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await axios.post("https://automatic-space-system-v6v6pxwv66wrhpvx6-4000.app.github.dev/api/v1/tourist", {
+    await axios.post("https://automatic-space-system-v6v6pxwv66wrhpvx6-4000.app.github.dev/api/v1/auth", {
       medicalCenterRegistrationId: "123456789",
       name: "Medical Center Name",
       ownerName: "Owner Name",
@@ -25,7 +25,7 @@ function App() {
       nearestDestination: "City Hospital",
       medicalCenterMedia: "http://example.com/image.jpg"
       
-    
+     
       
     }).then((response) => {
       console.log("then worked");
