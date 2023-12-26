@@ -14,8 +14,17 @@ function App() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     await axios.post("https://automatic-space-system-v6v6pxwv66wrhpvx6-4000.app.github.dev/api/v1/tourist", {
+      medicalCenterRegistrationId: "123456789",
+      name: "Medical Center Name",
+      ownerName: "Owner Name",
+      address: "123 Main Street",
+      email: "test@example.com",
+      phone: "123-456-7890",
+      username: "testuser",
+      password: "testpassword",
+      nearestDestination: "City Hospital",
+      medicalCenterMedia: "http://example.com/image.jpg"
       
-    
     
       
     }).then((response) => {
@@ -23,9 +32,23 @@ function App() {
       console.log(response);
       window.location.href = "/";
     }).catch((error) => {
-      console.log();
-      console.log("catch worked");
-      console.log(error);
+      
+      if (error.response) {
+        
+        console.log("error in response");
+        console.log(error.response.data);
+        console.log(error.response.status);
+        console.log(error.response.headers);
+      } else if (error.request) {
+        console.log("error in request");
+        
+        console.log(error.request);
+        setName(error.request);
+      } else {
+        console.log("other error");
+        console.log('Error', error.message.toJSON());
+      }
+      // console.log(error.config);
     });
 
     setEmail("");

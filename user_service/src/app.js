@@ -3,6 +3,9 @@ const express = require('express')
 const app = express()
 const createHttpError = require('http-errors')
 const Router = require('./route')
+// cors
+const cors = require('cors');
+
 //const CompanyRouter = require('./routes/company')
 //const ProductRouter = require('./routes/products')
 //const OrderRouter = require('./routes/order')
@@ -14,7 +17,8 @@ const Router = require('./route')
 
 
 app.use(express.json())
-
+// use cors
+app.use(cors());
 app.use('/api/v1/tourist', Router);
 //app.use('/api/v1/companies', CompanyRouter);
 //app.use('/api/v1/products', ProductRouter)

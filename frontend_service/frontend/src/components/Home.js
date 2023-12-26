@@ -17,7 +17,23 @@ const Home = () => {
       console.log(response);
       window.location.href = "/";
     }).catch((error) => {
-      console.log(error);
+      
+
+      if (error.response) {
+        
+        console.log("error.response");
+        console.log(error.response.data.toJSON());
+        console.log(error.response.status.toJSON());
+        console.log(error.response.headers.toJSON());
+      } else if (error.request) {
+        console.log("error.request");
+        
+        console.log(error.request.toJSON());
+      } else {
+        console.log("other eror");
+        console.log('Error', error.message.toJSON());
+      }
+      // console.log(error.config);
     });
 
     setEmail("");
