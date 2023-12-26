@@ -8,7 +8,7 @@
     
     "start": "npm-run-all -p script2 script1",
     "script1": "cd ./user_service && npm start ",
-    "script2": "cd ./frontend_service/frontend && npm start"
+    "script2": "cd ./frontend_service && npm start"
     
     
   },
