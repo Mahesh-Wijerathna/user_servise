@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from "axios";
 
+
 const Register = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
@@ -50,6 +51,16 @@ const Register = () => {
       
     }).then((response) => {
       console.log("then worked");
+       
+        console.log(name);
+        console.log(email);
+        console.log(country);
+        console.log(phoneNumber);
+        console.log(username);
+        console.log(password);
+
+
+
       console.log(response);
       window.location.href = "/";
     }).catch((error) => {

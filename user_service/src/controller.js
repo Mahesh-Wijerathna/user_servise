@@ -4,50 +4,54 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 
+
+
 exports.login = async (req, res, next) => {
-    const email = req.body.email
-    const password = req.body.password
+    const username = req.body.username;
+    const password = req.body.password;
 
     try {
-        if (!email || !password) {
-            throw createHttpError(400, 'Missing required parameters')
+        if (!username || !password) {
+            throw createHttpError(400, 'Missing required parameters');
         }
 
-        const tourist = await TouristModel.findOne({ email: email }).exec();
+        const tourist = await TouristModel.findOne({ username: username }).exec();
 
         if (!tourist) {
-            throw createHttpError(400, 'User does not exist')
+            throw createHttpError(400, 'User does not exist');
         }
 
         const isPasswordValid = await bcrypt.compare(password, tourist.password);
 
         if (!isPasswordValid) {
-            throw createHttpError(400, 'Invalid credentials')
+            throw createHttpError(400, 'Invalid credentials');
         }
 
-        const user = await TouristModel.findOne({ email: email }).exec();
+        const user = await TouristModel.findOne({ username: username }).exec();
 
         const token = jwt.sign(
             {
                 user_id: user._id,
-                email: user.email,
+                username: user.username,
             },
             process.env.JWT_TOKEN_KEY,
             {
                 expiresIn: "4h",
             }
-        )
+        );
 
         user.token = token;
 
         const result = await user.save();
 
         res.status(200).send(result);
+        console.log("login successful");
 
     } catch (error) {
-        next(error)
+        console.log("error in login");
+        next(error); // 
     }
-}
+};
 
 
 exports.register = async (req, res, next) => {
@@ -57,6 +61,9 @@ exports.register = async (req, res, next) => {
     const phoneNumber = req.body.phoneNumber
     const country = req.body.country
     const username = req.body.username
+
+    console.log(req.body);
+
     try {
         if (!email || !password || !name || !phoneNumber  || !country || !username) {
             throw createHttpError(400, 'Missing required parameters')

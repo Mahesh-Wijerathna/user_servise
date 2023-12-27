@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import { useDispatch } from "react-redux";
+import { login } from "../slices/userSlice";
+import axios from "axios";
 
 const Login = () => {
     const [username, setUsername] = useState('');
@@ -12,11 +15,47 @@ const Login = () => {
         setPassword(e.target.value);
     };
 
-    const handleSubmit = (e) => {
+    const dispatch = useDispatch();
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Perform login logic here
-        console.log('Username:', username);
-        console.log('Password:', password);
+        const response = await axios.post("https://automatic-space-system-v6v6pxwv66wrhpvx6-4000.app.github.dev/api/v1/tourist/login", {
+            username: username,
+            password: password,
+    })//then and catch
+    .then((response) => {
+      console.log("then worked");
+      console.log(response);
+      //
+    }).catch((error) => {
+      
+      if (error.response) {
+        
+        console.log("error in response");
+        console.log(error.response.data);
+      } else if (error.request) {
+        
+        console.log("error in request");
+        console.log(error.request);
+      } else {
+        
+        console.log("error in something else");
+        console.log(error.message);
+      }
+    })
+
+    console.log(response);
+
+
+    dispatch(
+      login(response.data)
+    );
+
+    //  setuser name and password to empty string
+    setUsername("");
+    setPassword("");
+
+    // redirect to the logout page
+    window.location = "/logout";
     };
 
     return (
