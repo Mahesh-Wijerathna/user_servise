@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { useDispatch } from "react-redux";
-import { login } from "../slices/userSlice";
+//import { useDispatch } from "react-redux";
+//import { login } from "../slices/userSlice";
 import axios from "axios";
 
 const Login = () => {
@@ -15,19 +15,21 @@ const Login = () => {
         setPassword(e.target.value);
     };
 
-    const dispatch = useDispatch();
+    //const dispatch = useDispatch();
     const handleSubmit = async (e) => {
         e.preventDefault();
         const response = await axios.post("https://automatic-space-system-v6v6pxwv66wrhpvx6-4000.app.github.dev/api/v1/tourist/login", {
             username: username,
-            password: password,
+            password: password
     })//then and catch
     .then((response) => {
-      console.log("then worked");
-      console.log(response);
+      console.log(response.data.username + " login successful");
+      //console.log(response);
       //
     }).catch((error) => {
-      
+      // Error
+      console.log(response.data.username + " login unsuccessful");
+
       if (error.response) {
         
         console.log("error in response");
@@ -43,19 +45,22 @@ const Login = () => {
       }
     })
 
-    console.log(response);
+    //console.log(response);
 
 
-    dispatch(
-      login(response.data)
-    );
+    // dispatch(
+    //   login(response.data)
+    // );
 
     //  setuser name and password to empty string
     setUsername("");
     setPassword("");
 
+    //login successful alert
+    alert("login successful \n   Rest is under implementation");
+
     // redirect to the logout page
-    window.location = "/logout";
+    //window.location = "/";
     };
 
     return (

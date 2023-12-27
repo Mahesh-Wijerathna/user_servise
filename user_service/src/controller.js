@@ -1,4 +1,5 @@
 const TouristModel = require('./tourist')
+const mongoose = require('mongoose')
 const createHttpError = require('http-errors')
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
@@ -9,6 +10,9 @@ const jwt = require('jsonwebtoken');
 exports.login = async (req, res, next) => {
     const username = req.body.username;
     const password = req.body.password;
+    
+
+
 
     try {
         if (!username || !password) {
@@ -49,7 +53,7 @@ exports.login = async (req, res, next) => {
 
     } catch (error) {
         console.log("error in login");
-        next(error); // 
+        //next(error); 
     }
 };
 
@@ -94,9 +98,80 @@ exports.register = async (req, res, next) => {
 
 
     } catch (error) {
+
         next(error)
 
     }
 
 
 }
+
+exports.update = async (req, res, next) => {
+
+    const userId = req.params.id;
+
+    const {
+        name,
+        email,
+        country,
+        phoneNumber,
+        username,
+        password
+        
+
+    } = req.body;
+
+
+    try {
+
+        if (!mongoose.isValidObjectId(userId)) {
+            throw createHttpError(400, "Invalid Id")
+        }
+
+
+        if (!name || !email || !country || !phoneNumber || !username || !password) {
+            throw createHttpError(400, 'Please provide all the required fields');
+        }
+
+        // const { image } = req.files;
+        // let filepath
+        // let filepathtoUplaod;
+
+        // if (image) {
+        //     if (!image.mimetype.startsWith('image')) {
+        //         throw createHttpError(400, 'Only images are allowed');
+        //     }
+        //     filepath = __dirname + '../../../public/products/' + image.name
+        //     image.mv(filepath);
+        //     filepathtoUplaod = '/public/products/' + image.name
+        // };
+
+        const tourist = await TouristModel.findById(userId).exec();
+
+        if (!tourist) {
+            throw createHttpError(404, 'Tourist not found');
+        }
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        tourist.name = name;
+        tourist.email = email;
+        tourist.country = country;
+        tourist.phoneNumber = phoneNumber;
+        tourist.username = username;
+        tourist.password = hashedPassword;
+
+        
+        
+        const result = await tourist.save();
+
+        res.status(200).send(result);
+
+
+    } catch (error) {
+        //next(error)
+    }
+}
+
+
+
+
