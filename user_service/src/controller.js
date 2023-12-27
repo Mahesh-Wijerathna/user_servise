@@ -47,7 +47,7 @@ exports.login = async (req, res, next) => {
         res.status(200).send(result);
         console.log("login successful");
 
-    } catch (error) {           
+    } catch (error) {
         console.log("error in login");
         next(error); // 
     }
