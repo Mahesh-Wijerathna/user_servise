@@ -37,6 +37,7 @@ const Home_ = () => {
             <div>
               <Link className="btn" to="/login">Login</Link>
               <Link className="btn" to="/register">Register</Link>
+              <Link className="btn" to="/update">Update</Link>
             </div>
           </ul>
         </nav>

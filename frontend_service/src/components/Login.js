@@ -23,6 +23,9 @@ const Login = () => {
             password: password
     })//then and catch
     .then((response) => {
+      dispatch(
+        login(response.data)
+      );
       console.log(response.data.username + " login successful");
       //console.log(response);
       //
@@ -45,12 +48,10 @@ const Login = () => {
       }
     })
 
-    //console.log(response);
+    //console.log("response data " + response.data.username);
 
 
-    dispatch(
-      login(response.data)
-    );
+    
 
     //  setuser name and password to empty string
     setUsername("");

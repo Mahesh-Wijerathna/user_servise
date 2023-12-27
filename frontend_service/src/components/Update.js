@@ -6,20 +6,22 @@ const Update = () => {
     //const old_user = axios.get('http://localhost:4000/api/v1/tourist/60a6f8b3f6b5a30015b6c5b0');
 
     // user id as use effect
-    const userID = "658bac9c06df01560979fb10";
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [country, setCountry] = useState('');
-    const [phoneNumber, setPhoneNumber] = useState('');
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
+    const userID = JSON.parse(localStorage.getItem("user"))._id;
+    const [name, setName] = useState(JSON.parse(localStorage.getItem("user")).name);
+    const [email, setEmail] = useState(JSON.parse(localStorage.getItem("user")).email);
+    const [country, setCountry] = useState(JSON.parse(localStorage.getItem("user")).country);
+    const [phoneNumber, setPhoneNumber] = useState(JSON.parse(localStorage.getItem("user")).phoneNumber);
+    const [username, setUsername] = useState(JSON.parse(localStorage.getItem("user")).username);
+    const [password, setPassword] = useState("Enter new password");
+    // ask password to go forward
+
 
     const handleUpdate = async (e) => {
         e.preventDefault();
-        // axios with id as variable    template 
-        //await axios.put(`http://localhost:4000/api/v1/tourist/${old_user._id}`, {
+        // user id show
+        console.log(userID);
 
-        await axios.put(`https://automatic-space-system-v6v6pxwv66wrhpvx6-4000.app.github.dev/api/v1/tourist/`+ {userID}, {
+        await axios.put(`https://automatic-space-system-v6v6pxwv66wrhpvx6-4000.app.github.dev/api/v1/tourist/`+ userID, {
             
             name: name,            
             email: email,
@@ -72,7 +74,8 @@ const Update = () => {
     setUsername("");
     setPassword("");
 
-    alert("update successful \n   Rest is under implementation");
+    //alert("update successful \n   Rest is under implementation");
+    window.location.href = "/";
     };
 
     return (

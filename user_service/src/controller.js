@@ -49,10 +49,11 @@ exports.login = async (req, res, next) => {
         const result = await user.save();
 
         res.status(200).send(result);
-        console.log("login successful");
+        console.log("login successful from server side  =" + username);
+        console.log(result);
 
     } catch (error) {
-        console.log("error in login");
+        console.log("error in login in server side =" );
         //next(error); 
     }
 };
@@ -98,8 +99,8 @@ exports.register = async (req, res, next) => {
 
 
     } catch (error) {
-
-        next(error)
+        console.log("error in register in server side");
+        //next(error)
 
     }
 
