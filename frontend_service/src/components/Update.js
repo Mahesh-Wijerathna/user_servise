@@ -15,6 +15,43 @@ const Update = () => {
     const [password, setPassword] = useState("Enter new password");
     // ask password to go forward
 
+   // write simple axios delete template
+    const handleDelete = async (e) => {
+        e.preventDefault();
+        // user id show
+
+        await axios.delete(`https://automatic-space-system-v6v6pxwv66wrhpvx6-4000.app.github.dev/api/v1/tourist/`+ userID, {
+
+        }).then((response) => {
+      console.log("then worked");
+          
+      console.log(response);
+      window.location.href = "/";
+    }).catch((error) => {
+
+
+      if (error.response) {
+
+        console.log("error in response");
+        console.log(error.response.data);
+        console.log(error.response.status);
+        console.log(error.response.headers);
+      } else if (error.request) {
+        console.log("error in request");
+
+        console.log(error.request);
+        
+      } else {
+        console.log("other error");
+        console.log('Error', error.message.toJSON());
+      }
+
+      // console.log(error.config);
+    });
+    
+    };
+    
+
 
     const handleUpdate = async (e) => {
         e.preventDefault();
@@ -140,6 +177,9 @@ const Update = () => {
                 <button type="button" onClick={handleUpdate}>
                     Update
                 </button>
+                 <button type="button" onClick={handleDelete}>
+                     Delete
+                 </button>
             </form>
         </div>
     );
