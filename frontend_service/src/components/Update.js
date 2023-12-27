@@ -6,7 +6,7 @@ const Update = () => {
     //const old_user = axios.get('http://localhost:4000/api/v1/tourist/60a6f8b3f6b5a30015b6c5b0');
 
     // user id as use effect
-    const userID = "60a6f8b3f6b5a30015b6c5b0";
+    const userID = "658bac9c06df01560979fb10";
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [country, setCountry] = useState('');
@@ -19,7 +19,7 @@ const Update = () => {
         // axios with id as variable    template 
         //await axios.put(`http://localhost:4000/api/v1/tourist/${old_user._id}`, {
 
-        await axios.put(`https://automatic-space-system-v6v6pxwv66wrhpvx6-4000.app.github.dev/api/v1/tourist/${userID}`, {
+        await axios.put(`https://automatic-space-system-v6v6pxwv66wrhpvx6-4000.app.github.dev/api/v1/tourist/`+ {userID}, {
             
             name: name,            
             email: email,
@@ -71,6 +71,8 @@ const Update = () => {
     setEmail("");
     setUsername("");
     setPassword("");
+
+    alert("update successful \n   Rest is under implementation");
     };
 
     return (
@@ -84,6 +86,7 @@ const Update = () => {
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                 />
+                <br/>
 
                 <label htmlFor="email">Email:</label>
                 <input
@@ -93,6 +96,7 @@ const Update = () => {
                     onChange={(e) => setEmail(e.target.value)}
                 />
 
+                <br/>
                 <label htmlFor="country">Country:</label>
                 <input
                     type="text"
@@ -100,6 +104,7 @@ const Update = () => {
                     value={country}
                     onChange={(e) => setCountry(e.target.value)}
                 />
+                <br/>
 
                 <label htmlFor="phoneNumber">Phone Number:</label>
                 <input
@@ -108,7 +113,9 @@ const Update = () => {
                     value={phoneNumber}
                     onChange={(e) => setPhoneNumber(e.target.value)}
                 />
+                <br/>
 
+                
                 <label htmlFor="username">Username:</label>
                 <input
                     type="text"
@@ -116,6 +123,7 @@ const Update = () => {
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                 />
+                <br/>
 
                 <label htmlFor="password">Password:</label>
                 <input
@@ -124,6 +132,7 @@ const Update = () => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                 />
+                <br/>
 
                 <button type="button" onClick={handleUpdate}>
                     Update

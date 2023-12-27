@@ -171,6 +171,28 @@ exports.update = async (req, res, next) => {
         //next(error)
     }
 }
+// get one user
+exports.getOne = async (req, res, next) => {
+    const userId = req.params.id;
+
+    try {
+
+        if (!mongoose.isValidObjectId(userId)) {
+            throw createHttpError(400, "Invalid Id")
+        }
+
+        const tourist = await TouristModel.findById(userId).exec();
+
+        if (!tourist) {
+            throw createHttpError(404, 'Tourist not found');
+        }
+
+        res.status(200).send(tourist);
+
+    } catch (error) {
+        //next(error)
+    }
+}
 
 
 

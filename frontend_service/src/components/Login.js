@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-//import { useDispatch } from "react-redux";
-//import { login } from "../slices/userSlice";
+import { useDispatch } from "react-redux";
+import { login } from "../slices/userSlice";
 import axios from "axios";
 
 const Login = () => {
@@ -15,7 +15,7 @@ const Login = () => {
         setPassword(e.target.value);
     };
 
-    //const dispatch = useDispatch();
+    const dispatch = useDispatch();
     const handleSubmit = async (e) => {
         e.preventDefault();
         const response = await axios.post("https://automatic-space-system-v6v6pxwv66wrhpvx6-4000.app.github.dev/api/v1/tourist/login", {
@@ -48,9 +48,9 @@ const Login = () => {
     //console.log(response);
 
 
-    // dispatch(
-    //   login(response.data)
-    // );
+    dispatch(
+      login(response.data)
+    );
 
     //  setuser name and password to empty string
     setUsername("");
