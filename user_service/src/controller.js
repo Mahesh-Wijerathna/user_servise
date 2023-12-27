@@ -205,9 +205,9 @@ exports.delete = async (req, res, next) => {
             throw createHttpError(400, "Invalid Id")
         }
 
-        //const result = await TouristModel.findByIdAndDelete(touristId).exec();
+        const result = await TouristModel.findByIdAndDelete(touristId).exec();
         //find by id
-        const result = await TouristModel.findById(touristId).exec();
+        //const result = await TouristModel.findById(touristId).exec();
         console.log("result to delete = "    + result);
 
 

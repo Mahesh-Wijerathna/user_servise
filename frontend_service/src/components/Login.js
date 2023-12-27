@@ -58,10 +58,10 @@ const Login = () => {
     setPassword("");
 
     //login successful alert
-    alert("login successful \n   Rest is under implementation");
+    //alert("login successful \n   Rest is under implementation");
 
     // redirect to the logout page
-    //window.location = "/";
+    window.location = "/";
     };
 
     return (
