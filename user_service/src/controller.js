@@ -172,7 +172,7 @@ exports.update = async (req, res, next) => {
         //next(error)
     }
 }
-// get one user
+
 exports.getOne = async (req, res, next) => {
     const userId = req.params.id;
 
@@ -195,6 +195,30 @@ exports.getOne = async (req, res, next) => {
     }
 }
 
+exports.delete = async (req, res, next) => {
 
+    const touristId = req.params.id;
+    
+
+    try {
+        if (!mongoose.isValidObjectId(touristId)) {
+            throw createHttpError(400, "Invalid Id")
+        }
+
+        //const result = await TouristModel.findByIdAndDelete(touristId).exec();
+        //find by id
+        const result = await TouristModel.findById(touristId).exec();
+        console.log("result to delete = "    + result);
+
+
+        if (!result) {
+            throw createHttpError(404, 'Product not found');
+        }
+
+        res.status(200).send(result);
+    } catch (error) {
+        next(error)
+    }
+}
 
 
