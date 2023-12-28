@@ -6,10 +6,12 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     
-    "start": "npm-run-all -p script0 script1 script2  ",
+    "start": "npm-run-all -p  script1 script2 script-1 script-2 ",
     "script1": "cd ./user_service && npm start ",
     "script2": "cd ./medical_center_service && npm start ",
-    "script0": "cd ./frontend_service && npm start"
+    "script-1": "cd ./frontend_service && npm start",
+    "script-2": "cd ./medical-center-frontend-service && npm start"
+
     
     
   },

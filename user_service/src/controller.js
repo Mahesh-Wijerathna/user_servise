@@ -191,7 +191,7 @@ exports.getOne = async (req, res, next) => {
         res.status(200).send(tourist);
 
     } catch (error) {
-        //next(error)
+        next(error)
     }
 }
 
